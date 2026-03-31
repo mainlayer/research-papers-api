@@ -183,12 +183,26 @@ async def get_paper_full(
             ).model_dump(),
         )
 
-    # Verify entitlement with Mainlayer
-    entitled = await mainlayer.check_entitlement(
-        payer_wallet=x_payer_wallet,
-        resource_id=paper_id,
-        price_usd=PAPER_PRICE_USD,
-    )
+    # Verify entitlement with Mainlayer (with error handling)
+    try:
+        entitled = await mainlayer.check_entitlement(
+            payer_wallet=x_payer_wallet,
+            resource_id=paper_id,
+            price_usd=PAPER_PRICE_USD,
+        )
+    except Exception as err:
+        logger.error(
+            "Entitlement check failed: paper=%s wallet=%s error=%s",
+            paper_id, x_payer_wallet, str(err)
+        )
+        return JSONResponse(
+            status_code=503,
+            content={
+                "error": "service_unavailable",
+                "message": "Payment verification temporarily unavailable. Please try again.",
+                "detail": str(err) if os.getenv("DEBUG") else None,
+            },
+        )
 
     if not entitled:
         payment_url = mainlayer.payment_url(resource_id=paper_id, price_usd=PAPER_PRICE_USD)
