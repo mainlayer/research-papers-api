@@ -2,7 +2,7 @@
 
 Academic papers API for AI agents. Pay $0.05 per paper — no subscription needed.
 
-Browse and search 20 landmark AI/ML papers for free. Pay $0.05 via [Mainlayer](https://mainlayer.xyz) to unlock the full text of any paper. Perfect for research agents that need to read papers on demand without managing subscriptions.
+Browse and search 20 landmark AI/ML papers for free. Pay $0.05 via [Mainlayer](https://mainlayer.fr) to unlock the full text of any paper. Perfect for research agents that need to read papers on demand without managing subscriptions.
 
 ---
 
@@ -185,7 +185,7 @@ If you haven't paid yet, you receive:
   "message": "Payment of $0.05 required to access 'Attention Is All You Need'...",
   "price_usd": 0.05,
   "paper_id": "paper-001",
-  "payment_url": "https://api.mainlayer.xyz/pay?resource_id=paper-001&price_usd=0.05"
+  "payment_url": "https://api.mainlayer.fr/pay?resource_id=paper-001&price_usd=0.05"
 }
 ```
 
@@ -202,7 +202,7 @@ This API is designed to be used autonomously by AI research agents:
 3. **Pay and read** — call `GET /papers/{id}/full` with `X-Payer-Wallet`; follow the `payment_url` in the 402 if not yet paid
 4. **Retry** — after payment, re-issue `GET /papers/{id}/full` to receive the full text
 
-Payment is handled by [Mainlayer](https://mainlayer.xyz) — payment infrastructure for AI agents.
+Payment is handled by [Mainlayer](https://mainlayer.fr) — payment infrastructure for AI agents.
 
 ---
 
@@ -253,7 +253,7 @@ docker build -t research-papers-api .
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `MAINLAYER_API_KEY` | Yes | — | Your Mainlayer API key |
-| `MAINLAYER_BASE_URL` | No | `https://api.mainlayer.xyz` | Mainlayer API base URL |
+| `MAINLAYER_BASE_URL` | No | `https://api.mainlayer.fr` | Mainlayer API base URL |
 | `PORT` | No | `8000` | Server port |
 | `ENV` | No | `production` | Set to `development` for hot reload |
 

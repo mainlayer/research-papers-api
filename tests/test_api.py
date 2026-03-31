@@ -33,7 +33,7 @@ def _entitled_mainlayer() -> MainlayerClient:
     ml = MainlayerClient.__new__(MainlayerClient)
     ml.check_entitlement = AsyncMock(return_value=True)
     ml.payment_url = lambda resource_id, price_usd=PAPER_PRICE_USD: (
-        f"https://api.mainlayer.xyz/pay?resource_id={resource_id}&price_usd={price_usd:.2f}"
+        f"https://api.mainlayer.fr/pay?resource_id={resource_id}&price_usd={price_usd:.2f}"
     )
     return ml
 
@@ -43,7 +43,7 @@ def _denied_mainlayer() -> MainlayerClient:
     ml = MainlayerClient.__new__(MainlayerClient)
     ml.check_entitlement = AsyncMock(return_value=False)
     ml.payment_url = lambda resource_id, price_usd=PAPER_PRICE_USD: (
-        f"https://api.mainlayer.xyz/pay?resource_id={resource_id}&price_usd={price_usd:.2f}"
+        f"https://api.mainlayer.fr/pay?resource_id={resource_id}&price_usd={price_usd:.2f}"
     )
     return ml
 
